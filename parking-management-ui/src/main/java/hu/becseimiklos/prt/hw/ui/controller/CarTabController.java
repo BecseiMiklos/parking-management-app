@@ -28,11 +28,16 @@ public class CarTabController {
     @FXML
     private Button saveCar;
 
+
+    @FXML
+    public void initialize() {
+    }
+
     @FXML
     private void handleSave() {
         CarVo carVo = new CarVo();
         carVo.setLicensePlateNumber(licensePlateNumberField.getText());
-        carVo.setHasParkingPass(parkingPassCheckBox.isSelected());
+        //carVo.setHasParkingPass(parkingPassCheckBox.isSelected());
         carService.save(carVo);
     }
 }

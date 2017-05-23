@@ -6,6 +6,5 @@ import org.springframework.stereotype.Component;
 @Component
 public class MainController {
 
-    @FXML
-    private CarTabController carTabController;
+    @FXML private CarTabController carTabController;
 }
