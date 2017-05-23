@@ -1,23 +1,23 @@
-package hu.becseimiklos.prt.hw.controller;
+package hu.becseimiklos.prt.hw.ui.main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-
-import java.io.IOException;
 
 @SpringBootApplication
 public class Main extends Application {
 
     private ConfigurableApplicationContext springContext;
     private Parent rootNode;
+
+    private static Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -26,10 +26,9 @@ public class Main extends Application {
     @Override
     public void init() throws Exception {
         springContext = SpringApplication.run(Main.class);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/RootLayout.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Main.fxml"));
         fxmlLoader.setControllerFactory(springContext::getBean);
         rootNode = fxmlLoader.load();
-
     }
 
     @Override

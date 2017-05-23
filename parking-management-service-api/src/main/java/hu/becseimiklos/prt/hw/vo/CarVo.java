@@ -1,22 +1,25 @@
-package hu.becseimiklos.prt.hw.data.entity;
+package hu.becseimiklos.prt.hw.vo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+
 import java.io.Serializable;
 
-@Entity
-public class Car implements Serializable {
+public class CarVo implements Serializable {
 
-    @Id
-    @GeneratedValue
+    public CarVo() {}
+
     private Long id;
 
     private String licensePlateNumber;
 
     private Boolean hasParkingPass;
 
-    public Car() {}
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getLicensePlateNumber() {
         return licensePlateNumber;
@@ -36,7 +39,7 @@ public class Car implements Serializable {
 
     @Override
     public String toString() {
-        return "Car{" +
+        return "CarVo{" +
                 "id=" + id +
                 ", licensePlateNumber='" + licensePlateNumber + '\'' +
                 ", hasParkingPass=" + hasParkingPass +

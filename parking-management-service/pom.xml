@@ -11,5 +11,25 @@
 
     <artifactId>parking-management-service</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>hu.becseimiklos.prt.hw</groupId>
+            <artifactId>parking-management-service-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hu.becseimiklos.prt.hw</groupId>
+            <artifactId>parking-management-data</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>0.7.5</version>
+        </dependency>
+    </dependencies>
+
 
 </project>
