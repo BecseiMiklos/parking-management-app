@@ -23,12 +23,11 @@
         </rowConstraints>
          <children>
             <Label prefHeight="17.0" prefWidth="118.0" text="License Plate Number" />
-            <Label text="Parking pass" GridPane.rowIndex="1" />
             <TextField fx:id="licensePlateNumberField" prefHeight="25.0" prefWidth="130.0" GridPane.columnIndex="1" />
-            <CheckBox fx:id="hasParkingPassCheckBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+            <CheckBox fx:id="parkingPassCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="158.0" text="Parking Pass" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Label layoutX="25.0" layoutY="14.0" text="Autó" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+      <Label layoutX="25.0" layoutY="14.0" text="Car" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

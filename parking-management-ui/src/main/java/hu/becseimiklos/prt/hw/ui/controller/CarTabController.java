@@ -37,7 +37,7 @@ public class CarTabController {
     private void handleSave() {
         CarVo carVo = new CarVo();
         carVo.setLicensePlateNumber(licensePlateNumberField.getText());
-        //carVo.setHasParkingPass(parkingPassCheckBox.isSelected());
+        carVo.setHasParkingPass(parkingPassCheckBox.isSelected());
         carService.save(carVo);
     }
 }
