@@ -32,15 +32,16 @@ public class Main extends Application {
     @Override
     public void init() throws Exception {
         springContext = SpringApplication.run(Main.class);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Main.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/mainSite.fxml"));
         fxmlLoader.setControllerFactory(springContext::getBean);
         rootNode = fxmlLoader.load();
     }
 
+
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.setScene(new Scene(rootNode));
-        primaryStage.show();
+    public void start(Stage stage) throws Exception {
+        stage.setScene(new Scene(rootNode));
+        stage.show();
     }
 
     @Override

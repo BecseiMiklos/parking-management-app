@@ -1,32 +1,30 @@
 package hu.becseimiklos.prt.hw.ui.controller;
 
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXTextField;
 import hu.becseimiklos.prt.hw.service.CarService;
 import hu.becseimiklos.prt.hw.vo.CarVo;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CarTabController {
+public class RegisterSiteController {
 
     @Autowired
     private CarService carService;
 
     @FXML
-    private AnchorPane carTab;
+    private JFXTextField licensePlateNumberField;
 
     @FXML
-    private TextField licensePlateNumberField;
+    private JFXTextField brandField;
 
     @FXML
-    private CheckBox parkingPassCheckBox;
+    private JFXTextField colorField;
 
     @FXML
-    private Button saveCar;
+    private JFXCheckBox parkingPassCheckBox;
 
 
     @FXML
@@ -37,6 +35,8 @@ public class CarTabController {
     private void handleSave() {
         CarVo carVo = new CarVo();
         carVo.setLicensePlateNumber(licensePlateNumberField.getText());
+//        carVo.setBrand(brandField.getText());
+//        carVo.setColor(colorField.getText());
         carVo.setHasParkingPass(parkingPassCheckBox.isSelected());
         carService.save(carVo);
     }

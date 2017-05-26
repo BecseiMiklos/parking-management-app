@@ -30,7 +30,7 @@ public class CarServiceImpl implements CarService {
         if (savedCar == null) {
             logger.warn("Saving of new car was unsuccessful: " + newCar.getLicensePlateNumber());
         } else {
-            logger.debug("Saving successful: " + newCar.getLicensePlateNumber());
+            logger.debug("Saving successful: " + newCar);
         }
         return CarMapper.toVo(savedCar);
     }

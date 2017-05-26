@@ -19,6 +19,8 @@
     <orderEntry type="module" module-name="parking-management-service" />
     <orderEntry type="module" module-name="parking-management-data" />
     <orderEntry type="library" name="Maven: org.modelmapper:modelmapper:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: com.jfoenix:jfoenix:1.4.0" level="project" />
+    <orderEntry type="library" name="Maven: de.jensd:fontawesomefx:8.9" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-jpa:1.5.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:1.5.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:1.5.3.RELEASE" level="project" />
