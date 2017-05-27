@@ -3,26 +3,21 @@ package hu.becseimiklos.prt.hw.ui.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
+import hu.becseimiklos.prt.hw.service.CarService;
+import hu.becseimiklos.prt.hw.vo.CarVo;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RegisterSiteController {
 
-    private final static String HOME_SITE_URL = "/fxml/homeSite.fxml";
-    private final static String SUMMARY_SITE_URL = "/fxml/summarySite.fxml";
+    @Autowired
+    CarService carService;
 
     @Autowired
-    StageManager stageManager = new StageManager();
-
-    @FXML
-    private AnchorPane registerSite;
-
-    @FXML
-    private JFXButton homeButton;
-
-    @FXML
-    private JFXButton summaryButton;
+    SummarySiteController summarySiteController;
 
     @FXML
     private JFXButton saveButton;
@@ -40,13 +35,15 @@ public class RegisterSiteController {
     private JFXCheckBox parkingPassCheckBox;
 
     @FXML
-    void handleHomeButton() {
-        stageManager.switchStage(homeButton, HOME_SITE_URL);
-    }
+    void handleSaveButton(ActionEvent event) {
+        CarVo newCar = new CarVo();
+        newCar.setLicensePlateNumber(licensePlateNumberField.getText());
+        newCar.setBrand(brandField.getText());
+        newCar.setColor(colorField.getText());
+        newCar.setHasParkingPass(parkingPassCheckBox.isSelected());
 
-    @FXML
-    void handleSummaryButton( ) {
-        stageManager.switchStage(summaryButton, SUMMARY_SITE_URL);
+        carService.save(newCar);
+        summarySiteController.getCarList();
     }
 
 }

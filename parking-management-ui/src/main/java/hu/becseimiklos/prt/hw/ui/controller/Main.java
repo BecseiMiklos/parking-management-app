@@ -22,6 +22,7 @@ public class Main extends Application {
 
     private ConfigurableApplicationContext springContext;
     private Parent rootNode;
+    private Stage mainStage;
 
     private static Logger logger = LoggerFactory.getLogger(Main.class);
 
@@ -32,20 +33,24 @@ public class Main extends Application {
     @Override
     public void init() throws Exception {
         springContext = SpringApplication.run(Main.class);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/homeSite.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/mainSite.fxml"));
         fxmlLoader.setControllerFactory(springContext::getBean);
         rootNode = fxmlLoader.load();
     }
 
-
     @Override
     public void start(Stage stage) throws Exception {
         stage.setScene(new Scene(rootNode));
+        mainStage = stage;
         stage.show();
     }
 
     @Override
     public void stop() throws Exception {
         springContext.close();
+    }
+
+    public Stage getMainStage() {
+        return mainStage;
     }
 }

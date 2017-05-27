@@ -14,21 +14,43 @@ public class Car implements Serializable {
     private Long id;
 
     private String licensePlateNumber;
-
+    private String brand;
+    private String color;
     private Boolean hasParkingPass;
 
-    public Car() {}
+    public Car() {
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public String getLicensePlateNumber() {
         return licensePlateNumber;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public Boolean getHasParkingPass() {
+        return hasParkingPass;
     }
 
     public void setLicensePlateNumber(String licensePlateNumber) {
         this.licensePlateNumber = licensePlateNumber;
     }
 
-    public Boolean getHasParkingPass() {
-        return hasParkingPass;
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public void setHasParkingPass(Boolean hasParkingPass) {
@@ -40,6 +62,8 @@ public class Car implements Serializable {
         return "Car{" +
                 "id=" + id +
                 ", licensePlateNumber='" + licensePlateNumber + '\'' +
+                ", brand='" + brand + '\'' +
+                ", color='" + color + '\'' +
                 ", hasParkingPass=" + hasParkingPass +
                 '}';
     }

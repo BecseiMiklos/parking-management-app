@@ -3,9 +3,13 @@ package hu.becseimiklos.prt.hw.mapper;
 
 import hu.becseimiklos.prt.hw.data.entity.Car;
 import hu.becseimiklos.prt.hw.vo.CarVo;
+import javafx.collections.ObservableList;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CarMapper {
 
@@ -19,6 +23,16 @@ public class CarMapper {
             return null;
         }
         return mapper.map(car, CarVo.class);
+    }
+
+    public static List<CarVo> toVo(List<Car> cars) {
+        List<CarVo> carVos = new ArrayList<>();
+        CarVo mappedCar;
+        for (Car car : cars) {
+            mappedCar = mapper.map(car, CarVo.class);
+            carVos.add(mappedCar);
+        }
+        return carVos;
     }
 
     public static Car toDto(CarVo carVo) {
