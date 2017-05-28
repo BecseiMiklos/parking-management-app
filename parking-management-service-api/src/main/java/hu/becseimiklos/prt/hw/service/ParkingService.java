@@ -14,4 +14,6 @@ public interface ParkingService {
     ParkingVo findByCarAndAndExitTimeIsNull(CarVo carVo);
 
     List<ParkingVo> findByCar(CarVo carVo);
+
+    List<ParkingVo> findAllInProcessParking();
 }

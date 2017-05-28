@@ -5,18 +5,19 @@ import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class ParkingModel {
 
     private SimpleLongProperty id;
 
-    private SimpleObjectProperty<LocalDate> enterTime;
-    private SimpleObjectProperty<LocalDate> exitTime;
+    private SimpleObjectProperty<Date> enterTime;
+    private SimpleObjectProperty<Date> exitTime;
     private SimpleObjectProperty<CarModel> car;
 
     public ParkingModel(){}
 
-    public ParkingModel(Long id, LocalDate enterTime, LocalDate exitTime, CarVo carVo) {
+    public ParkingModel(Long id, Date enterTime, Date exitTime, CarVo carVo) {
         this.id = new SimpleLongProperty(id);
         this.enterTime = new SimpleObjectProperty<>(enterTime);
         this.exitTime = new SimpleObjectProperty<>(exitTime);
@@ -35,27 +36,27 @@ public class ParkingModel {
         this.id = new SimpleLongProperty(id);
     }
 
-    public LocalDate getEnterTime() {
+    public Date getEnterTime() {
         return enterTime.get();
     }
 
-    public SimpleObjectProperty<LocalDate> enterTimeProperty() {
+    public SimpleObjectProperty<Date> enterTimeProperty() {
         return enterTime;
     }
 
-    public void setEnterTime(LocalDate enterTime) {
+    public void setEnterTime(Date enterTime) {
         this.enterTime = new SimpleObjectProperty<>(enterTime);
     }
 
-    public LocalDate getExitTime() {
+    public Date getExitTime() {
         return exitTime.get();
     }
 
-    public SimpleObjectProperty<LocalDate> exitTimeProperty() {
+    public SimpleObjectProperty<Date> exitTimeProperty() {
         return exitTime;
     }
 
-    public void setExitTime(LocalDate exitTime) {
+    public void setExitTime(Date exitTime) {
         this.exitTime = new SimpleObjectProperty<>(exitTime);
     }
 

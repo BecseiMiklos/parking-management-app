@@ -14,4 +14,5 @@ public interface ParkingRepository extends JpaRepository<Parking, Long> {
 
     Parking findByCarAndAndExitTimeIsNull(Car car);
     List<Parking> findByCar(Car car);
+    List<Parking> findAllByExitTimeIsNull();
 }

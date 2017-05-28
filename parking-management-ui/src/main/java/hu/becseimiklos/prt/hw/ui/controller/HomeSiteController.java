@@ -26,6 +26,9 @@ public class HomeSiteController implements Initializable {
     @Autowired
     ParkingService parkingService;
 
+    @Autowired
+    ParkingSiteController parkingSiteController;
+
     @FXML
     private JFXTextField licensePlateNumberField;
 
@@ -46,6 +49,7 @@ public class HomeSiteController implements Initializable {
         ParkingVo parkingVo = new ParkingVo();
         parkingVo.setCar(enteringCar);
         parkingService.enter(parkingVo);
+        parkingSiteController.getParkingList();
     }
 
     @FXML
@@ -54,6 +58,7 @@ public class HomeSiteController implements Initializable {
 
         ParkingVo parkingVo = parkingService.findByCarAndAndExitTimeIsNull(exittingCar);
         parkingService.exit(parkingVo);
+        parkingSiteController.getParkingList();
     }
 
 }

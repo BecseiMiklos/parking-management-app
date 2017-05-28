@@ -35,6 +35,11 @@
                   <fx:include source="SummarySite.fxml" />
                </content>
             </Tab>
+            <Tab text="PARKING">
+               <content>
+                  <fx:include source="ParkingSite.fxml" />
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
    </children>
