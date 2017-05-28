@@ -1,6 +1,7 @@
 package hu.becseimiklos.prt.hw.vo;
 
 
+
 import java.io.Serializable;
 
 public class CarVo implements Serializable {
@@ -13,7 +14,8 @@ public class CarVo implements Serializable {
     private String color;
     private Boolean hasParkingPass;
 
-    public CarVo() {}
+    public CarVo() {
+    }
 
     public CarVo(Long id, String licensePlateNumber, String brand, String color, Boolean hasParkingPass) {
         this.id = id;

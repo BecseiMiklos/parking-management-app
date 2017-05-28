@@ -37,6 +37,9 @@ public class SummarySiteController implements Initializable {
     CarService carService;
 
     @Autowired
+    HomeSiteController homeSiteController;
+
+    @Autowired
     CarEditDialogController carEditDialogController;
 
     ObservableList<CarModel> carModelObservableList;
@@ -83,7 +86,8 @@ public class SummarySiteController implements Initializable {
         carModelObservableList = FXCollections.observableArrayList();
 
         for (CarVo carVo : cars) {
-            carModelObservableList.add(new CarModel(carVo.getId(), carVo.getLicensePlateNumber(), carVo.getBrand(), carVo.getColor(), carVo.getHasParkingPass()));
+            CarModel carModel = new CarModel(carVo.getId(), carVo.getLicensePlateNumber(), carVo.getBrand(), carVo.getColor(), carVo.getHasParkingPass());
+            carModelObservableList.add(carModel);
         }
 
         carTable.setItems(carModelObservableList);
@@ -111,6 +115,7 @@ public class SummarySiteController implements Initializable {
             carService.delete(carTable.getSelectionModel().getSelectedItem().getId());
             carTable.getItems().remove(selectedIndex);
             getCarList();
+            homeSiteController.updateAutoComplete();
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(main.getMainStage());
@@ -136,7 +141,7 @@ public class SummarySiteController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("/fxml/CarEditDialog.fxml"));
-            loader.setController(carEditDialogController);
+            loader.setController(carEditDialogController); // !important for creating a new instance of the controller class
             AnchorPane page = (AnchorPane) loader.load();
 
             Stage dialogStage = new Stage();

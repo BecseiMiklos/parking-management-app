@@ -71,7 +71,6 @@ public class CarEditDialogController implements Initializable {
 
         CarVo modifiedCar = new CarVo(carModel.getId(), carModel.getLicensePlateNumber(), carModel.getBrand(), carModel.getColor(), carModel.isHasParkingPass());
         carService.save(modifiedCar);
-
         okClicked = true;
         dialogStage.close();
     }
@@ -80,7 +79,6 @@ public class CarEditDialogController implements Initializable {
     void handleCancel(ActionEvent event) {
         dialogStage.close();
     }
-
 
 
 }

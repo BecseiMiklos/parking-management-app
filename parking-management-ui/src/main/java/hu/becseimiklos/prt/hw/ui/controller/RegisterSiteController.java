@@ -1,6 +1,5 @@
 package hu.becseimiklos.prt.hw.ui.controller;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import hu.becseimiklos.prt.hw.service.CarService;
@@ -19,8 +18,8 @@ public class RegisterSiteController {
     @Autowired
     SummarySiteController summarySiteController;
 
-    @FXML
-    private JFXButton saveButton;
+    @Autowired
+    HomeSiteController homeSiteController;
 
     @FXML
     private JFXTextField licensePlateNumberField;
@@ -44,6 +43,7 @@ public class RegisterSiteController {
 
         carService.save(newCar);
         summarySiteController.getCarList();
+        homeSiteController.updateAutoComplete();
     }
 
 }

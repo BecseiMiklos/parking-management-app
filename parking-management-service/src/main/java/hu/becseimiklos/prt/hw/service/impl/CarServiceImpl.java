@@ -2,6 +2,7 @@ package hu.becseimiklos.prt.hw.service.impl;
 
 
 import hu.becseimiklos.prt.hw.data.entity.Car;
+import hu.becseimiklos.prt.hw.data.entity.Parking;
 import hu.becseimiklos.prt.hw.data.repository.CarRepository;
 import hu.becseimiklos.prt.hw.mapper.CarMapper;
 import hu.becseimiklos.prt.hw.service.CarService;
@@ -17,6 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,15 +28,11 @@ import java.util.List;
 @Transactional(propagation = Propagation.REQUIRED)
 public class CarServiceImpl implements CarService {
 
+
     private static Logger logger = LoggerFactory.getLogger(CarServiceImpl.class);
 
     @Autowired
-    private CarRepository carRepository;
-
-    @Override
-    public CarVo findById(Long id) {
-        return CarMapper.toVo(carRepository.findOne(id));
-    }
+    CarRepository carRepository;
 
     @Override
     public void delete(Long id) {
@@ -55,5 +55,10 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<CarVo> findAll() {
         return CarMapper.toVo(carRepository.findAll());
+    }
+
+    @Override
+    public CarVo findByLicensePlateNumber(String licensePlateNumber) {
+        return CarMapper.toVo(carRepository.findByLicensePlateNumber(licensePlateNumber));
     }
 }

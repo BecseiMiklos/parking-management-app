@@ -3,7 +3,9 @@ package hu.becseimiklos.prt.hw.ui.model;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
+import lombok.ToString;
 
+@ToString
 public class CarModel {
     private SimpleLongProperty id;
     private SimpleStringProperty licensePlateNumber;
