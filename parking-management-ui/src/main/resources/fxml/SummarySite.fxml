@@ -65,11 +65,10 @@
                         <JFXCheckBox fx:id="parkingPassCheckBox" text=" " GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
-                  <ButtonBar layoutX="312.0" layoutY="273.0" prefHeight="79.0" prefWidth="265.0">
+                  <ButtonBar layoutX="384.0" layoutY="273.0" prefHeight="79.0" prefWidth="193.0">
                      <buttons>
-                        <JFXButton fx:id="newButton" buttonType="RAISED" style="-fx-background-color: #81c784;" text="New" />
-                        <JFXButton fx:id="editButton" buttonType="RAISED" style="-fx-background-color: #81c784;" text="Edit" />
-                        <JFXButton fx:id="deleteButton" buttonType="RAISED" onAction="#handleDeleteCar" style="-fx-background-color: #81c784;" text="Delete" />
+                        <JFXButton buttonType="RAISED" onAction="#handleEditCar" style="-fx-background-color: #81c784;" text="Edit" />
+                        <JFXButton buttonType="RAISED" onAction="#handleDeleteCar" style="-fx-background-color: #81c784;" text="Delete" />
                      </buttons>
                   </ButtonBar>
                </children>

@@ -22,17 +22,17 @@
         <tabs>
           <Tab text="HOME">
                <content>
-                  <fx:include source="homeSite.fxml" />
+                  <fx:include source="HomeSite.fxml" />
                </content>
           </Tab>
           <Tab text="REGISTER">
                <content>
-                  <fx:include source="registerSite.fxml" />
+                  <fx:include source="RegisterSite.fxml" />
                </content>
           </Tab>
             <Tab text="SUMMARY">
                <content>
-                  <fx:include source="summarySite.fxml" />
+                  <fx:include source="SummarySite.fxml" />
                </content>
             </Tab>
         </tabs>

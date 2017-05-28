@@ -2,7 +2,6 @@ package hu.becseimiklos.prt.hw.ui.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import hu.becseimiklos.prt.hw.data.entity.Car;
 import hu.becseimiklos.prt.hw.service.CarService;
 import hu.becseimiklos.prt.hw.ui.model.CarModel;
 import hu.becseimiklos.prt.hw.vo.CarVo;
@@ -10,15 +9,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -31,6 +35,9 @@ public class SummarySiteController implements Initializable {
 
     @Autowired
     CarService carService;
+
+    @Autowired
+    CarEditDialogController carEditDialogController;
 
     ObservableList<CarModel> carModelObservableList;
 
@@ -112,8 +119,44 @@ public class SummarySiteController implements Initializable {
             alert.setContentText("Please select a car in the table.");
             alert.showAndWait();
         }
+    }
 
+    @FXML
+    void handleEditCar(ActionEvent event) {
+        CarModel selectedCar = carTable.getSelectionModel().getSelectedItem();
+        if (selectedCar != null) {
+            boolean okClicked = showCarEditDialog(selectedCar);
+            if (okClicked) {
+                showCarDetails(selectedCar);
+            }
+        }
+    }
 
+    public boolean showCarEditDialog(CarModel carModel) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("/fxml/CarEditDialog.fxml"));
+            loader.setController(carEditDialogController);
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Car");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(main.getMainStage());
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            carEditDialogController = loader.getController();
+            carEditDialogController.setDialogStage(dialogStage);
+            carEditDialogController.setCarModel(carModel);
+
+            dialogStage.showAndWait();
+
+            return carEditDialogController.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
 
