@@ -4,7 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -17,8 +17,9 @@ public class Parking implements Serializable {
     @SequenceGenerator(name = "SEQ", sequenceName = "PARKING_SEQ")
     private Long id;
 
-    private Date enterTime;
-    private Date exitTime;
+    private LocalDateTime enterTime;
+    private LocalDateTime exitTime;
+    private Integer paidCost;
 
     @ManyToOne()
     private Car car;

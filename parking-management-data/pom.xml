@@ -12,4 +12,13 @@
 
     <artifactId>parking-management-data</artifactId>
 
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-java8 -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-java8</artifactId>
+            <version>5.2.10.Final</version>
+        </dependency>
+    </dependencies>
+
 </project>

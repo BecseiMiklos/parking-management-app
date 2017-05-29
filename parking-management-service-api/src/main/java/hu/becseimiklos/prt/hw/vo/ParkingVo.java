@@ -3,13 +3,14 @@ package hu.becseimiklos.prt.hw.vo;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class ParkingVo implements Serializable {
 
     private Long id;
-    private Date enterTime;
-    private Date exitTime;
+    private LocalDateTime enterTime;
+    private LocalDateTime exitTime;
     private CarVo car;
+    private Integer paidCost;
 }

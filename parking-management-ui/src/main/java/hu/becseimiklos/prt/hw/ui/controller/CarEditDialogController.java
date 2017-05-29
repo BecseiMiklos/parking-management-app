@@ -25,6 +25,9 @@ public class CarEditDialogController implements Initializable {
     @Autowired
     CarService carService;
 
+    @Autowired
+    ParkingSiteController parkingSiteController;
+
     public CarEditDialogController() {
     }
 
@@ -71,8 +74,11 @@ public class CarEditDialogController implements Initializable {
 
         CarVo modifiedCar = new CarVo(carModel.getId(), carModel.getLicensePlateNumber(), carModel.getBrand(), carModel.getColor(), carModel.isHasParkingPass());
         carService.save(modifiedCar);
+        parkingSiteController.getParkingList();
+
         okClicked = true;
         dialogStage.close();
+
     }
 
     @FXML

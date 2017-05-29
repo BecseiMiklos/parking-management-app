@@ -7,6 +7,7 @@ import hu.becseimiklos.prt.hw.mapper.ParkingMapper;
 import hu.becseimiklos.prt.hw.service.ParkingService;
 import hu.becseimiklos.prt.hw.vo.CarVo;
 import hu.becseimiklos.prt.hw.vo.ParkingVo;
+import javafx.beans.property.BooleanProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 
@@ -26,13 +29,13 @@ public class ParkingServiceImpl implements ParkingService {
 
     private static Logger logger = LoggerFactory.getLogger(CarServiceImpl.class);
 
-
     @Autowired
     ParkingRepository parkingRepository;
 
     @Override
     public ParkingVo enter(ParkingVo parkingVo) {
-        parkingVo.setEnterTime(new Date());
+        parkingVo.setEnterTime(LocalDateTime.now());
+        parkingVo.setPaidCost(0);
         Parking newParking = ParkingMapper.toDto(parkingVo);
 
         Parking savedParking = parkingRepository.save(newParking);
@@ -46,7 +49,8 @@ public class ParkingServiceImpl implements ParkingService {
 
     @Override
     public ParkingVo exit(ParkingVo parkingVo) {
-        parkingVo.setExitTime(new Date());
+        parkingVo.setExitTime(LocalDateTime.now());
+        parkingVo.setPaidCost(calculateParking(parkingVo.getEnterTime(), parkingVo.getCar().getHasParkingPass()));
         Parking modifiedParking = ParkingMapper.toDto(parkingVo);
 
         Parking savedParking = parkingRepository.save(modifiedParking);
@@ -71,5 +75,17 @@ public class ParkingServiceImpl implements ParkingService {
     @Override
     public List<ParkingVo> findAllInProcessParking() {
         return ParkingMapper.toVo(parkingRepository.findAllByExitTimeIsNull());
+    }
+
+    @Override
+    public int calculateParking(LocalDateTime fromTime, Boolean hasParkingPass) {
+        if (hasParkingPass) {
+            return 0;
+        } else {
+            double elapsedSeconds = ChronoUnit.SECONDS.between(fromTime, LocalDateTime.now());
+            logger.debug("elapsed Seconds:" + elapsedSeconds);
+            int parkingCost = (int) Math.round((elapsedSeconds / 3600) * 250);
+            return parkingCost;
+        }
     }
 }
