@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="1024.0" style="-fx-background-color: #C8E6C9;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.becseimiklos.prt.hw.controller.HomeSiteController">
+   <children>
+      <Text layoutX="404.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MANAGE CARS" textAlignment="CENTER" wrappingWidth="213.13671875" AnchorPane.topAnchor="22.0">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <JFXButton fx:id="enterButton" buttonType="RAISED" disable="true" layoutX="422.0" layoutY="297.0" onAction="#handleEnterButton" prefHeight="26.0" prefWidth="75.0" style="-fx-background-color: #4CAF50;" text="Enter">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <GridPane layoutX="422.0" layoutY="219.0" prefWidth="180.0" vgap="15.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <JFXTextField fx:id="licensePlateNumberField" alignment="CENTER" onAction="#checkParking" prefHeight="30.0" promptText="License Plate Number" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+         </children>
+      </GridPane>
+      <FontAwesomeIconView glyphName="CAR" layoutX="454.0" layoutY="178.0" size="100" />
+      <JFXButton fx:id="exitButton" buttonType="RAISED" disable="true" layoutX="527.0" layoutY="297.0" onAction="#handleExitButton" prefHeight="26.0" prefWidth="75.0" style="-fx-background-color: #4CAF50;" text="Exit">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
