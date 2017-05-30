@@ -1,7 +1,6 @@
 package hu.becseimiklos.prt.hw.service.impl;
 
 
-
 import hu.becseimiklos.prt.hw.entity.Car;
 import hu.becseimiklos.prt.hw.mapper.CarMapper;
 import hu.becseimiklos.prt.hw.repository.CarRepository;
@@ -14,6 +13,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
