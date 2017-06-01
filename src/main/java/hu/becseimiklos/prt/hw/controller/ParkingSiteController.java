@@ -26,8 +26,6 @@ public class ParkingSiteController implements Initializable {
     private static final String DATE_PATTERN = "yyyy.MM.dd HH:mm";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_PATTERN);
 
-    private ObservableList<ParkingModel> inProcessParkingObservableList;
-
     @Autowired
     ParkingService parkingService;
 
@@ -58,7 +56,7 @@ public class ParkingSiteController implements Initializable {
 
     public void getParkingList() {
         List<ParkingVo> inProcessParkings = parkingService.findAllInProcessParking();
-        inProcessParkingObservableList = FXCollections.observableArrayList();
+        ObservableList<ParkingModel> inProcessParkingObservableList = FXCollections.observableArrayList();
 
         for (ParkingVo parkingVo : inProcessParkings) {
             ParkingModel parkingModel = new ParkingModel(parkingVo.getId(), parkingVo.getEnterTime(), parkingVo.getExitTime(), parkingVo.getPaidCost(), parkingVo.getCar());

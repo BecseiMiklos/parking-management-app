@@ -6,8 +6,7 @@ import hu.becseimiklos.prt.hw.mapper.CarMapper;
 import hu.becseimiklos.prt.hw.repository.CarRepository;
 import hu.becseimiklos.prt.hw.service.CarService;
 import hu.becseimiklos.prt.hw.vo.CarVo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
@@ -19,10 +18,8 @@ import java.util.List;
 @Service
 @Configurable
 @Transactional(propagation = Propagation.REQUIRED)
+@Slf4j
 public class CarServiceImpl implements CarService {
-
-
-    private static Logger logger = LoggerFactory.getLogger(CarServiceImpl.class);
 
     @Autowired
     CarRepository carRepository;
@@ -34,13 +31,13 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarVo save(CarVo carVo) {
-        Car newCar = CarMapper.toDto(carVo);
+        Car newCar = CarMapper.toEntity(carVo);
 
         Car savedCar = carRepository.save(newCar);
         if (savedCar == null) {
-            logger.warn("Saving of new car was unsuccessful: " + newCar.getLicensePlateNumber());
+            log.warn("Saving of new car was unsuccessful: " + newCar.getLicensePlateNumber());
         } else {
-            logger.debug("Saving successful: " + newCar);
+            log.debug("Saving successful: " + newCar);
         }
         return CarMapper.toVo(savedCar);
     }

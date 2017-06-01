@@ -42,14 +42,12 @@ public class HomeSiteController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         updateAutoComplete();
-        licensePlateNumberField.textProperty().addListener((observable, oldValue, newValue) -> {
-            checkParking();
-        });
+        licensePlateNumberField.textProperty().addListener((observable, oldValue, newValue) -> checkParking());
     }
 
     public void updateAutoComplete() {
         List<CarVo> cars = carService.findAll();
-        List<String> carPlates = cars.stream().map(car -> car.getLicensePlateNumber()).collect(Collectors.toList());
+        List<String> carPlates = cars.stream().map(CarVo::getLicensePlateNumber).collect(Collectors.toList());
         TextFields.bindAutoCompletion(licensePlateNumberField, carPlates);
     }
 
@@ -80,7 +78,7 @@ public class HomeSiteController implements Initializable {
             CarVo enteringCar = carService.findByLicensePlateNumber(licensePlateNumberField.getText());
             if ((enteringCar != null) && (parkingService.findByCarAndAndExitTimeIsNull(enteringCar) != null)) {
                 exitButton.setDisable(false);
-            } else if (enteringCar != null){
+            } else if (enteringCar != null) {
                 enterButton.setDisable(false);
             }
         }

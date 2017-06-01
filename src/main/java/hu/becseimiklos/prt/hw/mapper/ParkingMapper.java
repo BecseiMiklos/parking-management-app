@@ -2,22 +2,20 @@ package hu.becseimiklos.prt.hw.mapper;
 
 import hu.becseimiklos.prt.hw.entity.Parking;
 import hu.becseimiklos.prt.hw.vo.ParkingVo;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class ParkingMapper {
-
-    private static Logger logger = LoggerFactory.getLogger(CarMapper.class);
 
     private static ModelMapper mapper = new ModelMapper();
 
     public static ParkingVo toVo(Parking parking) {
         if (parking == null) {
-            logger.warn("ParkingEntity is null!");
+            log.warn("ParkingEntity is null!");
             return null;
         }
         return mapper.map(parking, ParkingVo.class);
@@ -33,9 +31,9 @@ public class ParkingMapper {
         return parkingVos;
     }
 
-    public static Parking toDto(ParkingVo parkingVo) {
+    public static Parking toEntity(ParkingVo parkingVo) {
         if (parkingVo == null) {
-            logger.warn("ParkingVo is null!");
+            log.warn("ParkingVo is null!");
             return null;
         }
         return mapper.map(parkingVo, Parking.class);

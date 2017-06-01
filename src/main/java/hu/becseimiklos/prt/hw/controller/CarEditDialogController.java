@@ -78,7 +78,6 @@ public class CarEditDialogController implements Initializable {
 
         okClicked = true;
         dialogStage.close();
-
     }
 
     @FXML

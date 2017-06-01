@@ -18,6 +18,7 @@ public class Car implements Serializable {
 
     @Column(unique = true)
     private String licensePlateNumber;
+
     private String brand;
     private String color;
     private Boolean hasParkingPass;

@@ -1,25 +1,22 @@
 package hu.becseimiklos.prt.hw.mapper;
 
 
-
 import hu.becseimiklos.prt.hw.entity.Car;
 import hu.becseimiklos.prt.hw.vo.CarVo;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class CarMapper {
-
-    private static Logger logger = LoggerFactory.getLogger(CarMapper.class);
 
     private static ModelMapper mapper = new ModelMapper();
 
     public static CarVo toVo(Car car) {
         if (car == null) {
-            logger.warn("CarEntity is null!");
+            log.warn("CarEntity is null!");
             return null;
         }
         return mapper.map(car, CarVo.class);
@@ -35,9 +32,9 @@ public class CarMapper {
         return carVos;
     }
 
-    public static Car toDto(CarVo carVo) {
+    public static Car toEntity(CarVo carVo) {
         if (carVo == null) {
-            logger.warn("CarVo is null!");
+            log.warn("CarVo is null!");
             return null;
         }
         return mapper.map(carVo, Car.class);

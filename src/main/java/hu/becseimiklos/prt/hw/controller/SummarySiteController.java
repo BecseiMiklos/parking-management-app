@@ -143,7 +143,7 @@ public class SummarySiteController implements Initializable {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("/fxml/CarEditDialog.fxml"));
             loader.setController(carEditDialogController); // !important for creating a new instance of the controller class
-            AnchorPane page = (AnchorPane) loader.load();
+            AnchorPane page = loader.load();
 
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Edit Car");
