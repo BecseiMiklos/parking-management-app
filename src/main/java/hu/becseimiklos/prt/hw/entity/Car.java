@@ -1,15 +1,24 @@
 package hu.becseimiklos.prt.hw.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import java.io.Serializable;
 
-@Data
 @Entity
+@Getter
+@Setter
+@ToString
 public class Car implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -5147165640225738026L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
@@ -22,4 +31,5 @@ public class Car implements Serializable {
     private String brand;
     private String color;
     private Boolean hasParkingPass;
+
 }

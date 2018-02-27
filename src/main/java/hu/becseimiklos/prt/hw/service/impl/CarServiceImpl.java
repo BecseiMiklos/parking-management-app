@@ -29,6 +29,11 @@ public class CarServiceImpl implements CarService {
         carRepository.delete(id);
     }
 
+    /**
+     * Saves a Car entity to the database
+     * @param carVo
+     * @return the saved entity
+     */
     @Override
     public CarVo save(CarVo carVo) {
         Car newCar = CarMapper.toEntity(carVo);

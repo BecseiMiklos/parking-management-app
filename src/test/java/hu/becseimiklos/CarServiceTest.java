@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @ContextConfiguration(classes = Main.class)
+@TestPropertySource(locations = "classpath:test.properties")
 public class CarServiceTest {
 
     @Autowired
@@ -41,7 +43,7 @@ public class CarServiceTest {
     }
 
     @Test
-    public void saveTest(){
+    public void saveTest() {
         CarVo carVo = new CarVo();
         carVo.setHasParkingPass(false);
         carVo.setColor("TestColor2");
@@ -64,7 +66,7 @@ public class CarServiceTest {
     }
 
     @Test
-    public void deleteTest(){
+    public void deleteTest() {
         CarVo deleteCandidate = carService.findByLicensePlateNumber("AAA000");
         carService.delete(deleteCandidate.getId());
         CarVo nullCandidate = carService.findByLicensePlateNumber("AAA000");

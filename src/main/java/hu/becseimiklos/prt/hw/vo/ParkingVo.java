@@ -1,11 +1,15 @@
 package hu.becseimiklos.prt.hw.vo;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
+@ToString
 public class ParkingVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -15,4 +19,5 @@ public class ParkingVo implements Serializable {
     private LocalDateTime exitTime;
     private CarVo car;
     private Integer paidCost;
+
 }
