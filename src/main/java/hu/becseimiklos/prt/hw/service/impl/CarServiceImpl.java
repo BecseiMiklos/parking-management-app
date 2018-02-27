@@ -8,16 +8,13 @@ import hu.becseimiklos.prt.hw.service.CarService;
 import hu.becseimiklos.prt.hw.vo.CarVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@Configurable
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional
 @Slf4j
 public class CarServiceImpl implements CarService {
 
@@ -31,6 +28,7 @@ public class CarServiceImpl implements CarService {
 
     /**
      * Saves a Car entity to the database
+     *
      * @param carVo
      * @return the saved entity
      */

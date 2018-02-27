@@ -10,18 +10,13 @@ import hu.becseimiklos.prt.hw.vo.CarVo;
 import hu.becseimiklos.prt.hw.vo.ParkingVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
-@Configurable
-@Transactional(propagation = Propagation.REQUIRED)
 @Slf4j
 public class ParkingServiceImpl implements ParkingService {
 
