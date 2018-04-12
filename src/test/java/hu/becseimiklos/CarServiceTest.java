@@ -3,7 +3,7 @@ package hu.becseimiklos;
 
 import hu.becseimiklos.prt.hw.main.Main;
 import hu.becseimiklos.prt.hw.service.CarService;
-import hu.becseimiklos.prt.hw.vo.CarVo;
+import hu.becseimiklos.prt.hw.vo.CarVO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,14 +27,14 @@ public class CarServiceTest {
 
     @Before
     public void prepareTheDatabase() {
-        CarVo carVo = new CarVo();
+        CarVO carVo = new CarVO();
         carVo.setHasParkingPass(true);
         carVo.setColor("TestColor");
         carVo.setBrand("TestBrand");
         carVo.setLicensePlateNumber("AAA000");
         carService.save(carVo);
 
-        CarVo carVo2 = new CarVo();
+        CarVO carVo2 = new CarVO();
         carVo.setHasParkingPass(false);
         carVo.setColor("TestColor2");
         carVo.setBrand("TestBrand2");
@@ -44,32 +44,32 @@ public class CarServiceTest {
 
     @Test
     public void saveTest() {
-        CarVo carVo = new CarVo();
+        CarVO carVo = new CarVO();
         carVo.setHasParkingPass(false);
         carVo.setColor("TestColor2");
         carVo.setBrand("TestBrand2");
         carVo.setLicensePlateNumber("BBB000");
-        CarVo savedCarVo = carService.save(carVo);
+        CarVO savedCarVo = carService.save(carVo);
         Assert.assertNotNull(savedCarVo);
     }
 
     @Test
     public void findAllTest() {
-        List<CarVo> allCars = carService.findAll();
+        List<CarVO> allCars = carService.findAll();
         Assert.assertNotNull(allCars);
     }
 
     @Test
     public void findByLicensePlateNumberTest() {
-        CarVo foundCarVo = carService.findByLicensePlateNumber("AAA000");
+        CarVO foundCarVo = carService.findByLicensePlateNumber("AAA000");
         Assert.assertEquals(foundCarVo.getLicensePlateNumber(), "AAA000");
     }
 
     @Test
     public void deleteTest() {
-        CarVo deleteCandidate = carService.findByLicensePlateNumber("AAA000");
+        CarVO deleteCandidate = carService.findByLicensePlateNumber("AAA000");
         carService.delete(deleteCandidate.getId());
-        CarVo nullCandidate = carService.findByLicensePlateNumber("AAA000");
+        CarVO nullCandidate = carService.findByLicensePlateNumber("AAA000");
         Assert.assertNull(nullCandidate);
     }
 }

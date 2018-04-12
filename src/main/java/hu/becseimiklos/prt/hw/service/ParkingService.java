@@ -1,22 +1,22 @@
 package hu.becseimiklos.prt.hw.service;
 
-import hu.becseimiklos.prt.hw.vo.CarVo;
-import hu.becseimiklos.prt.hw.vo.ParkingVo;
+import hu.becseimiklos.prt.hw.vo.CarVO;
+import hu.becseimiklos.prt.hw.vo.ParkingVO;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ParkingService {
 
-    ParkingVo enter(ParkingVo parkingVo);
+    ParkingVO enter(ParkingVO parkingVo);
 
-    ParkingVo exit(ParkingVo parkingVo);
+    ParkingVO exit(ParkingVO parkingVo);
 
-    ParkingVo findByCarAndAndExitTimeIsNull(CarVo carVo);
+    ParkingVO findByCarAndAndExitTimeIsNull(CarVO carVo);
 
-    List<ParkingVo> findByCar(CarVo carVo);
+    List<ParkingVO> findByCar(CarVO carVo);
 
-    List<ParkingVo> findAllInProcessParking();
+    List<ParkingVO> findAllInProcessParking();
 
     int calculateParking(LocalDateTime fromTime, Boolean hasParkingPass);
 }

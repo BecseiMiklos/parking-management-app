@@ -1,39 +1,40 @@
 package hu.becseimiklos.prt.hw.mapper;
 
+import hu.becseimiklos.prt.hw.controller.CarController;
 import hu.becseimiklos.prt.hw.entity.Parking;
-import hu.becseimiklos.prt.hw.vo.ParkingVo;
-import lombok.extern.slf4j.Slf4j;
+import hu.becseimiklos.prt.hw.vo.ParkingVO;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
-@Slf4j
 public class ParkingMapper {
 
+    private static final Logger log = Logger.getLogger(ParkingMapper.class.getName());
     private static ModelMapper mapper = new ModelMapper();
 
-    public static ParkingVo toVo(Parking parking) {
+    public static ParkingVO toVo(Parking parking) {
         if (parking == null) {
-            log.warn("ParkingEntity is null!");
+            log.warning("ParkingEntity is null!");
             return null;
         }
-        return mapper.map(parking, ParkingVo.class);
+        return mapper.map(parking, ParkingVO.class);
     }
 
-    public static List<ParkingVo> toVo(List<Parking> parkings) {
-        List<ParkingVo> parkingVos = new ArrayList<>();
-        ParkingVo mappedParking;
+    public static List<ParkingVO> toVo(List<Parking> parkings) {
+        List<ParkingVO> parkingVos = new ArrayList<>();
+        ParkingVO mappedParking;
         for (Parking parking : parkings) {
-            mappedParking = mapper.map(parking, ParkingVo.class);
+            mappedParking = mapper.map(parking, ParkingVO.class);
             parkingVos.add(mappedParking);
         }
         return parkingVos;
     }
 
-    public static Parking toEntity(ParkingVo parkingVo) {
+    public static Parking toEntity(ParkingVO parkingVo) {
         if (parkingVo == null) {
-            log.warn("ParkingVo is null!");
+            log.warning("ParkingVO is null!");
             return null;
         }
         return mapper.map(parkingVo, Parking.class);

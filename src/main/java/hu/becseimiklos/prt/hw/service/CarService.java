@@ -1,6 +1,6 @@
 package hu.becseimiklos.prt.hw.service;
 
-import hu.becseimiklos.prt.hw.vo.CarVo;
+import hu.becseimiklos.prt.hw.vo.CarVO;
 
 import java.util.List;
 
@@ -8,9 +8,10 @@ public interface CarService {
 
     void delete(Long id);
 
-    CarVo save(CarVo carVo);
+    CarVO save(CarVO carVo);
 
-    List<CarVo> findAll();
+    List<CarVO> findAll();
 
-    CarVo findByLicensePlateNumber(String licensePlateNumber);
+    CarVO findByLicensePlateNumber(String licensePlateNumber);
+
 }

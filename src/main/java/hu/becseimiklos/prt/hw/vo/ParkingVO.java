@@ -10,14 +10,14 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class ParkingVo implements Serializable {
+public class ParkingVO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1703019798430469876L;
 
     private Long id;
     private LocalDateTime enterTime;
     private LocalDateTime exitTime;
-    private CarVo car;
+    private CarVO car;
     private Integer paidCost;
 
 }

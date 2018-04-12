@@ -4,8 +4,8 @@ import hu.becseimiklos.prt.hw.main.Main;
 import hu.becseimiklos.prt.hw.repository.ParkingRepository;
 import hu.becseimiklos.prt.hw.service.CarService;
 import hu.becseimiklos.prt.hw.service.ParkingService;
-import hu.becseimiklos.prt.hw.vo.CarVo;
-import hu.becseimiklos.prt.hw.vo.ParkingVo;
+import hu.becseimiklos.prt.hw.vo.CarVO;
+import hu.becseimiklos.prt.hw.vo.ParkingVO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,14 +36,14 @@ public class ParkingServiceTest {
 
     @Before
     public void prepateTheDatabase() {
-        ParkingVo parkingVo = new ParkingVo();
-        parkingVo.setCar(new CarVo());
+        ParkingVO parkingVo = new ParkingVO();
+        parkingVo.setCar(new CarVO());
         parkingVo.setEnterTime(LocalDateTime.of(2017, 04, 27, 10, 25));
         parkingVo.setExitTime(null);
         parkingService.enter(parkingVo);
 
-        ParkingVo parkingVo2 = new ParkingVo();
-        parkingVo.setCar(new CarVo());
+        ParkingVO parkingVo2 = new ParkingVO();
+        parkingVo.setCar(new CarVO());
         parkingVo.setEnterTime(LocalDateTime.of(2017, 05, 27, 12, 25));
         parkingVo.setExitTime(null);
         parkingService.enter(parkingVo2);
@@ -51,11 +51,11 @@ public class ParkingServiceTest {
 
     @Test
     public void enterTest() {
-        ParkingVo parkingVo = new ParkingVo();
-        parkingVo.setCar(new CarVo());
+        ParkingVO parkingVo = new ParkingVO();
+        parkingVo.setCar(new CarVO());
         parkingVo.setEnterTime(LocalDateTime.of(1995, 04, 27, 10, 25));
         parkingVo.setPaidCost(150);
-        ParkingVo parkedVo = parkingService.enter(parkingVo);
+        ParkingVO parkedVo = parkingService.enter(parkingVo);
         Assert.assertNotNull("parkedVo shouldn't be NULL", parkedVo);
         Assert.assertEquals("parking should be 0 when entering", Integer.valueOf(0), parkedVo.getPaidCost());
         Assert.assertNotEquals(LocalDateTime.of(1995, 04, 27, 10, 25), parkedVo.getEnterTime());
@@ -63,18 +63,18 @@ public class ParkingServiceTest {
 
     @Test
     public void exitTest() {
-        CarVo carVo = new CarVo();
+        CarVO carVo = new CarVO();
         carVo.setHasParkingPass(false);
         carVo.setColor("Red");
         carVo.setBrand("Honda");
         carVo.setLicensePlateNumber("AAA000");
         carService.save(carVo);
 
-        ParkingVo parkingVo = new ParkingVo();
+        ParkingVO parkingVo = new ParkingVO();
         parkingVo.setCar(carVo);
         parkingVo.setEnterTime(LocalDateTime.of(2017, 05, 31, 9, 0));
         parkingVo.setPaidCost(0);
-        ParkingVo exitedVo = parkingService.exit(parkingVo);
+        ParkingVO exitedVo = parkingService.exit(parkingVo);
         Assert.assertNotNull("parkedVo shouldn't be NULL", exitedVo);
         Assert.assertNotEquals("parking shouldn't be 0 at exit", Integer.valueOf(0), exitedVo.getPaidCost());
         Assert.assertNotEquals(LocalDateTime.of(1995, 04, 27, 10, 25), exitedVo.getEnterTime());
@@ -82,37 +82,37 @@ public class ParkingServiceTest {
 
     @Test
     public void findByCarTest() {
-        CarVo carVo = new CarVo();
+        CarVO carVo = new CarVO();
         carVo.setHasParkingPass(true);
         carVo.setColor("TestColor");
         carVo.setBrand("TestBrand");
         carVo.setLicensePlateNumber("AAA000");
         carVo = carService.save(carVo);
 
-        ParkingVo parkingVo = new ParkingVo();
+        ParkingVO parkingVo = new ParkingVO();
         parkingVo.setCar(carVo);
         parkingVo.setEnterTime(LocalDateTime.of(2017, 05, 31, 9, 30));
         parkingVo.setExitTime(LocalDateTime.now());
         parkingService.enter(parkingVo);
 
-        List<ParkingVo> foundParkingVos = parkingService.findByCar(carVo);
+        List<ParkingVO> foundParkingVos = parkingService.findByCar(carVo);
         Assert.assertNotNull("Should contain one element", foundParkingVos);
     }
 
     @Test
     public void findByCarAndAndExitTimeIsNullTest() {
-        CarVo carVo = new CarVo();
+        CarVO carVo = new CarVO();
         carVo.setHasParkingPass(true);
         carVo.setColor("TestColor");
         carVo.setBrand("TestBrand");
         carVo.setLicensePlateNumber("AAA000");
         carVo = carService.save(carVo);
 
-        ParkingVo parkingVo = new ParkingVo();
+        ParkingVO parkingVo = new ParkingVO();
         parkingVo.setCar(carVo);
-        ParkingVo savedParkingVo = parkingService.enter(parkingVo);
+        ParkingVO savedParkingVo = parkingService.enter(parkingVo);
 
-        ParkingVo foundParkingVo = parkingService.findByCarAndAndExitTimeIsNull(carVo);
+        ParkingVO foundParkingVo = parkingService.findByCarAndAndExitTimeIsNull(carVo);
         Assert.assertEquals("Should be the same", savedParkingVo.getCar().getLicensePlateNumber(), foundParkingVo.getCar().getLicensePlateNumber());
         Assert.assertNull(foundParkingVo.getExitTime());
     }

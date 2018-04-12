@@ -2,41 +2,35 @@ package hu.becseimiklos.prt.hw.mapper;
 
 
 import hu.becseimiklos.prt.hw.entity.Car;
-import hu.becseimiklos.prt.hw.vo.CarVo;
-import lombok.extern.slf4j.Slf4j;
+import hu.becseimiklos.prt.hw.vo.CarVO;
 import org.modelmapper.ModelMapper;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
-@Slf4j
 public class CarMapper {
 
+    private static final Logger log = Logger.getLogger(CarMapper.class.getName());
     private static ModelMapper mapper = new ModelMapper();
 
-    public static CarVo toVo(Car car) {
+    public static CarVO toVO(Car car) {
         if (car == null) {
-            log.warn("CarEntity is null!");
+            log.warning("CarEntity is null!");
             return null;
         }
-        return mapper.map(car, CarVo.class);
+        return mapper.map(car, CarVO.class);
     }
 
-    public static List<CarVo> toVo(List<Car> cars) {
-        List<CarVo> carVos = new ArrayList<>();
-        CarVo mappedCar;
-        for (Car car : cars) {
-            mappedCar = mapper.map(car, CarVo.class);
-            carVos.add(mappedCar);
-        }
-        return carVos;
+    public static List<CarVO> toVO(List<Car> cars) {
+        return cars.stream().map(car -> mapper.map(car, CarVO.class)).collect(Collectors.toList());
     }
 
-    public static Car toEntity(CarVo carVo) {
-        if (carVo == null) {
-            log.warn("CarVo is null!");
+    public static Car toEntity(CarVO carVO) {
+        if (carVO == null) {
+            log.warning("CarVO is null!");
             return null;
         }
-        return mapper.map(carVo, Car.class);
+        return mapper.map(carVO, Car.class);
     }
 }
