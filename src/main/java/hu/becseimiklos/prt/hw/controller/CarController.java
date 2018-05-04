@@ -2,6 +2,7 @@ package hu.becseimiklos.prt.hw.controller;
 
 import hu.becseimiklos.prt.hw.service.CarService;
 import hu.becseimiklos.prt.hw.vo.CarVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,16 +15,15 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/car")
+@Slf4j
 public class CarController {
-
-    private static final Logger log = Logger.getLogger(CarController.class.getName());
 
     @Autowired
     CarService carService;
 
     @GetMapping("/list")
     public List<CarVO> list() {
-        log.info("CarController list called");
+        log.trace("CarService list() called");
         return carService.findAll();
     }
 

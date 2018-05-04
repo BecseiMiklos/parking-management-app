@@ -32,7 +32,7 @@ public class ParkingServiceImpl implements ParkingService {
 
         Parking savedParking = parkingRepository.save(newParking);
         if (savedParking == null) {
-            log.warning("Saving of new parking was unsuccessful: " + newParking);
+            log.warning(() -> "Saving of new parking was unsuccessful: " + newParking);
         } else {
             log.info("Saving successful: " + newParking);
         }

@@ -18,13 +18,7 @@ import java.util.Optional;
 public class CarServiceImpl implements CarService {
 
     @Autowired
-    CarRepository carRepository;
-
-    @Override
-    public void delete(Long id) {
-        Optional<Car> car = carRepository.findById(id);
-        car.ifPresent(car1 -> carRepository.delete(car1));
-    }
+    private CarRepository carRepository;
 
     /**
      * Saves a Car entity to the database.
@@ -37,6 +31,12 @@ public class CarServiceImpl implements CarService {
         Car newCar = CarMapper.toEntity(carVO);
         Car savedCar = carRepository.save(newCar);
         return CarMapper.toVO(savedCar);
+    }
+
+    @Override
+    public void delete(Long id) {
+        Optional<Car> car = carRepository.findById(id);
+        car.ifPresent(car1 -> carRepository.delete(car1));
     }
 
     @Override
