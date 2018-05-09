@@ -22,7 +22,7 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @ContextConfiguration(classes = Main.class)
-@TestPropertySource(locations = "classpath:test.properties")
+@TestPropertySource("classpath:test.properties")
 public class ParkingServiceTest {
 
     @Autowired

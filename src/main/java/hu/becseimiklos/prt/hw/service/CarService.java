@@ -14,4 +14,5 @@ public interface CarService {
 
     CarVO findByLicensePlateNumber(String licensePlateNumber);
 
+    List<CarVO> findAllByLicensePlateNumberIsLike(String licensePlateNumber);
 }

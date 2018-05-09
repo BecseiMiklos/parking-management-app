@@ -8,28 +8,44 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.logging.Logger;
 
+/**
+ * Manages the REST requests related to cars.
+ */
 @RestController
 @RequestMapping("/car")
 @Slf4j
 public class CarController {
 
     @Autowired
-    CarService carService;
+    private CarService carService;
 
+    /**
+     * Finds Cars which are matching the given criteria.
+     *
+     * @return Cars matching to the given criteria.
+     */
     @GetMapping("/list")
-    public List<CarVO> list() {
+    public List<CarVO> list(@RequestParam("licensePlate") String licensePlate) {
         log.trace("CarService list() called");
-        return carService.findAll();
+        return carService.findAllByLicensePlateNumberIsLike(licensePlate);
+//        return carService.findAll();
     }
 
+    /**
+     * Saves the given Car to the database.
+     *
+     * @param carVO the CarVO to save.
+     * @return the saved Car.
+     */
     @PostMapping("/save")
-    public CarVO save(@RequestBody CarVO carVo) {
-        return carService.save(carVo);
+    public CarVO save(@RequestBody CarVO carVO) {
+        log.trace("CarService save() called");
+        return carService.save(carVO);
     }
 
 }

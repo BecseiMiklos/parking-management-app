@@ -49,4 +49,9 @@ public class CarServiceImpl implements CarService {
         return CarMapper.toVO(carRepository.findByLicensePlateNumber(licensePlateNumber));
     }
 
+    @Override
+    public List<CarVO> findAllByLicensePlateNumberIsLike(String licensePlateNumber) {
+        return CarMapper.toVO(carRepository.findAllByLicensePlateNumberIsLike(licensePlateNumber));
+    }
+
 }

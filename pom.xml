@@ -37,7 +37,7 @@
         </developer>
     </developers>
 
-    <inceptionYear>2017</inceptionYear>
+    <inceptionYear>2018</inceptionYear>
 
     <organization>
         <name>Debreceni Egyetem Informatika Kar</name>
@@ -90,6 +90,8 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.16.20</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -207,6 +209,15 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.1</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <configLocation>${basedir}/config/checkstyle.xml</configLocation>
+                </configuration>
             </plugin>
         </plugins>
     </reporting>
