@@ -36,11 +36,7 @@ public class ParkingServiceImpl implements ParkingService {
         Parking newParking = ParkingMapper.toEntity(parkingVo);
 
         Parking savedParking = parkingRepository.save(newParking);
-        if (savedParking == null) {
-            log.warning(() -> "Saving of new parking was unsuccessful: " + newParking);
-        } else {
-            log.info("Saving successful: " + newParking);
-        }
+        log.info("Saving successful: " + newParking);
         return ParkingMapper.toVo(savedParking);
     }
 
@@ -51,11 +47,7 @@ public class ParkingServiceImpl implements ParkingService {
         Parking modifiedParking = ParkingMapper.toEntity(parkingVo);
 
         Parking savedParking = parkingRepository.save(modifiedParking);
-        if (savedParking == null) {
-            log.info("Saving of new parking was unsuccessful: " + modifiedParking);
-        } else {
-            log.info("Saving successful: " + modifiedParking);
-        }
+        log.info("Saving successful: " + modifiedParking);
         return ParkingMapper.toVo(savedParking);
     }
 

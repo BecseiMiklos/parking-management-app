@@ -2,6 +2,7 @@ package hu.becseimiklos.prt.hw.controller;
 
 import hu.becseimiklos.prt.hw.service.CarService;
 import hu.becseimiklos.prt.hw.vo.CarVO;
+import hu.becseimiklos.prt.hw.vo.ResponseVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,12 +33,12 @@ public class CarController {
      * @return Cars matching to the given criteria.
      */
     @GetMapping("/list")
-    public List<CarVO> list(@RequestParam("licensePlate") Optional<String> licensePlate) {
+    public ResponseVO<CarVO> list(@RequestParam("licensePlate") Optional<String> licensePlate) {
         log.trace("CarService list() called");
         if (licensePlate.isPresent()) {
-            return carService.findAllByLicensePlateNumberIsLike(licensePlate.get());
+            return new ResponseVO<CarVO>().setData(carService.findAllByLicensePlateNumberIsLike(licensePlate.get()));
         } else {
-            return carService.findAll();
+            return new ResponseVO<CarVO>().setData(carService.findAll());
         }
     }
 
