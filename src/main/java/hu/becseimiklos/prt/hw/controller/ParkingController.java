@@ -4,6 +4,7 @@ import hu.becseimiklos.prt.hw.service.CarService;
 import hu.becseimiklos.prt.hw.service.ParkingService;
 import hu.becseimiklos.prt.hw.vo.CarVO;
 import hu.becseimiklos.prt.hw.vo.ParkingVO;
+import hu.becseimiklos.prt.hw.vo.ResponseVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,18 +28,30 @@ public class ParkingController {
     CarService carService;
 
     @PostMapping("/enter")
-    public ParkingVO save(@RequestBody ParkingVO parkingVO) {
+    public ResponseVO<ParkingVO> enter(@RequestBody ParkingVO parkingVO) {
         log.trace("ParkingController start() called");
-        return parkingService.enter(parkingVO);
+        ResponseVO<ParkingVO> ret = new ResponseVO<>();
+
+        ParkingVO currentParking = parkingService.findByCarAndAndExitTimeIsNull(parkingVO.getCar());
+        if (currentParking != null) {
+            return ret.setFailure("This car is already parking!");
+        }
+        return ret.setSingleData(parkingService.enter(parkingVO));
     }
 
     @PostMapping("/exit/{licensePlate}")
-    public ParkingVO exit(@PathVariable String licensePlate) {
+    public ResponseVO<ParkingVO> exit(@PathVariable String licensePlate) {
+        ResponseVO<ParkingVO> ret = new ResponseVO<>();
         log.trace("ParkingController start() called");
         CarVO carVO = carService.findByLicensePlateNumber(licensePlate);
-        ParkingVO parkingVO = parkingService.findByCarAndAndExitTimeIsNull(carVO);
-        ParkingVO exit = parkingService.exit(parkingVO);
-        return exit;
-//        return parkingService.enter(parkingVO);
+        if (carVO == null) {
+            return ret.setFailure("There is no car with this license plate number!");
+        }
+
+        ParkingVO currentParking = parkingService.findByCarAndAndExitTimeIsNull(carVO);
+        if (currentParking == null) {
+            return ret.setFailure("There is no car parking with this license plate number!");
+        }
+        return ret.setSingleData(parkingService.exit(currentParking));
     }
 }

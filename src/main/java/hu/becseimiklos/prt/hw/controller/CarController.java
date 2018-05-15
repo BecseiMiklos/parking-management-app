@@ -5,6 +5,7 @@ import hu.becseimiklos.prt.hw.vo.CarVO;
 import hu.becseimiklos.prt.hw.vo.ResponseVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -34,11 +34,12 @@ public class CarController {
      */
     @GetMapping("/list")
     public ResponseVO<CarVO> list(@RequestParam("licensePlate") Optional<String> licensePlate) {
+        ResponseVO<CarVO> ret = new ResponseVO<>();
         log.trace("CarService list() called");
         if (licensePlate.isPresent()) {
-            return new ResponseVO<CarVO>().setData(carService.findAllByLicensePlateNumberIsLike(licensePlate.get()));
+            return ret.setData(carService.findAllByLicensePlateNumberIsLike(licensePlate.get()));
         } else {
-            return new ResponseVO<CarVO>().setData(carService.findAll());
+            return ret.setData(carService.findAll());
         }
     }
 
@@ -49,9 +50,15 @@ public class CarController {
      * @return the saved Car.
      */
     @PostMapping("/save")
-    public CarVO save(@RequestBody CarVO carVO) {
+    public ResponseVO<CarVO> save(@RequestBody CarVO carVO) {
+        ResponseVO<CarVO> ret = new ResponseVO<>();
         log.trace("CarService save() called");
-        return carService.save(carVO);
+        try {
+            ret.setSingleData(carService.save(carVO));
+        } catch (DataIntegrityViolationException e) {
+            return ret.setFailure("License plate number must be unique!");
+        }
+        return ret;
     }
 
 }
