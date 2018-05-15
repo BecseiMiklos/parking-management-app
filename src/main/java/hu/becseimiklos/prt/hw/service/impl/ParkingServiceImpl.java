@@ -10,13 +10,18 @@ import hu.becseimiklos.prt.hw.vo.CarVO;
 import hu.becseimiklos.prt.hw.vo.ParkingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * ParkingService implementation.
+ */
 @Service
+@Transactional
 public class ParkingServiceImpl implements ParkingService {
 
     private static final Logger log = Logger.getLogger(ParkingServiceImpl.class.getName());

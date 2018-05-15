@@ -15,6 +15,9 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * Represents a Parking, stores the important data of a Parking which will be saved to the database.
+ */
 @Entity
 @Getter
 @Setter

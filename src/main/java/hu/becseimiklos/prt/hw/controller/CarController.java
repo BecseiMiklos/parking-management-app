@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Manages the REST requests related to cars.
@@ -25,15 +26,19 @@ public class CarController {
     private CarService carService;
 
     /**
-     * Finds Cars which are matching the given criteria.
+     * Finds Cars which are matching the given criteria, if criteria is {@code null}, returns all cars.
      *
+     * @param licensePlate The license plate number that will be applied as a criteria during search.
      * @return Cars matching to the given criteria.
      */
     @GetMapping("/list")
-    public List<CarVO> list(@RequestParam("licensePlate") String licensePlate) {
+    public List<CarVO> list(@RequestParam("licensePlate") Optional<String> licensePlate) {
         log.trace("CarService list() called");
-        return carService.findAllByLicensePlateNumberIsLike(licensePlate);
-//        return carService.findAll();
+        if (licensePlate.isPresent()) {
+            return carService.findAllByLicensePlateNumberIsLike(licensePlate.get());
+        } else {
+            return carService.findAll();
+        }
     }
 
     /**

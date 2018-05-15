@@ -1,4 +1,4 @@
-package hu.becseimiklos.prt.hw.main;
+package hu.becseimiklos.prt.hw.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -6,9 +6,16 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+/**
+ * Configuration bean used to apply various configurations.
+ */
 @Configuration
 public class RestConfig {
 
+    /**
+     * Configuration bean to enable cross origin requests, needed during development.
+     * @return CorsFilter configuration bean.
+     */
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

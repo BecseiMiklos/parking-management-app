@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+/**
+ * Represents a Car, stores the important data of a Car which will be saved to the database.
+ */
 @Entity
 @Getter
 @Setter
