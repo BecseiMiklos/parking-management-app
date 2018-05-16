@@ -6,6 +6,7 @@ import hu.becseimiklos.prt.hw.mapper.CarMapper;
 import hu.becseimiklos.prt.hw.repository.CarRepository;
 import hu.becseimiklos.prt.hw.service.CarService;
 import hu.becseimiklos.prt.hw.vo.CarVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ import java.util.Optional;
  */
 @Service
 @Transactional
+@Slf4j
 public class CarServiceImpl implements CarService {
 
     @Autowired
@@ -31,6 +33,8 @@ public class CarServiceImpl implements CarService {
      */
     @Override
     public CarVO save(CarVO carVO) {
+        log.error(carVO.toString());
+        carVO.setLicensePlateNumber(carVO.getLicensePlateNumber().toUpperCase());
         Car newCar = CarMapper.toEntity(carVO);
         Car savedCar = carRepository.save(newCar);
         return CarMapper.toVO(savedCar);
@@ -50,11 +54,6 @@ public class CarServiceImpl implements CarService {
     @Override
     public CarVO findByLicensePlateNumber(String licensePlateNumber) {
         return CarMapper.toVO(carRepository.findByLicensePlateNumber(licensePlateNumber));
-    }
-
-    @Override
-    public List<CarVO> findAllByLicensePlateNumberIsLike(String licensePlateNumber) {
-        return CarMapper.toVO(carRepository.findAllByLicensePlateNumberIsLike(licensePlateNumber));
     }
 
 }

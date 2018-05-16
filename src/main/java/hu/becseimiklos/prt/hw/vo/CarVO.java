@@ -7,6 +7,9 @@ import lombok.ToString;
 
 import java.io.Serializable;
 
+/**
+ * Value object to transfer data of a Car.
+ */
 @Getter
 @Setter
 @ToString

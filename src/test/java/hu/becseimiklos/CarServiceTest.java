@@ -1,7 +1,9 @@
 package hu.becseimiklos;
 
 
+import hu.becseimiklos.prt.hw.entity.Car;
 import hu.becseimiklos.prt.hw.main.Main;
+import hu.becseimiklos.prt.hw.mapper.CarMapper;
 import hu.becseimiklos.prt.hw.service.CarService;
 import hu.becseimiklos.prt.hw.vo.CarVO;
 import org.junit.Assert;
@@ -35,10 +37,10 @@ public class CarServiceTest {
         carService.save(carVo);
 
         CarVO carVo2 = new CarVO();
-        carVo.setHasParkingPass(false);
-        carVo.setColor("TestColor2");
-        carVo.setBrand("TestBrand2");
-        carVo.setLicensePlateNumber("BBB000");
+        carVo2.setHasParkingPass(false);
+        carVo2.setColor("TestColor2");
+        carVo2.setBrand("TestBrand2");
+        carVo2.setLicensePlateNumber("BBB000");
         carService.save(carVo2);
     }
 
@@ -71,5 +73,11 @@ public class CarServiceTest {
         carService.delete(deleteCandidate.getId());
         CarVO nullCandidate = carService.findByLicensePlateNumber("AAA000");
         Assert.assertNull(nullCandidate);
+    }
+
+    @Test
+    public void carMapperNullTest() {
+        Car car = CarMapper.toEntity(null);
+        Assert.assertNull(car);
     }
 }

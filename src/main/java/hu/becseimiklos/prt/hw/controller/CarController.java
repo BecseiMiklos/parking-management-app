@@ -7,13 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Optional;
 
 /**
  * Manages the REST requests related to cars.
@@ -27,20 +25,15 @@ public class CarController {
     private CarService carService;
 
     /**
-     * Finds Cars which are matching the given criteria, if criteria is {@code null}, returns all cars.
+     * Finds all cars stored in the database.
      *
-     * @param licensePlate The license plate number that will be applied as a criteria during search.
-     * @return Cars matching to the given criteria.
+     * @return all cars.
      */
     @GetMapping("/list")
-    public ResponseVO<CarVO> list(@RequestParam("licensePlate") Optional<String> licensePlate) {
+    public ResponseVO<CarVO> list() {
         ResponseVO<CarVO> ret = new ResponseVO<>();
         log.trace("CarService list() called");
-        if (licensePlate.isPresent()) {
-            return ret.setData(carService.findAllByLicensePlateNumberIsLike(licensePlate.get()));
-        } else {
-            return ret.setData(carService.findAll());
-        }
+        return ret.setData(carService.findAll());
     }
 
     /**
@@ -58,6 +51,20 @@ public class CarController {
         } catch (DataIntegrityViolationException e) {
             return ret.setFailure("License plate number must be unique!");
         }
+        return ret;
+    }
+
+    /**
+     * Searches the {@link hu.becseimiklos.prt.hw.entity.Car} with the given {@code id}, and deletes it.
+     *
+     * @param id {@link hu.becseimiklos.prt.hw.entity.Car} id.
+     * @return {@link hu.becseimiklos.prt.hw.vo.ResponseVO} representing the outcome of the request.
+     */
+    @PostMapping("/delete/{id}")
+    public ResponseVO<Void> delete(@PathVariable Long id) {
+        ResponseVO<Void> ret = new ResponseVO<>();
+        log.trace("CarService delete() called");
+        carService.delete(id);
         return ret;
     }
 

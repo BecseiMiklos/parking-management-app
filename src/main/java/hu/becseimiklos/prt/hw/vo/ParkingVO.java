@@ -2,14 +2,15 @@ package hu.becseimiklos.prt.hw.vo;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * Value object to transfer data of a Parking.
+ */
 @Getter
 @Setter
-@ToString
 public class ParkingVO implements Serializable {
 
     private static final long serialVersionUID = 1703019798430469876L;

@@ -58,12 +58,12 @@ public class ParkingServiceImpl implements ParkingService {
 
     @Override
     public List<ParkingVO> findByCar(CarVO carVo) {
-        return ParkingMapper.toVo(parkingRepository.findByCar(CarMapper.toEntity(carVo)));
+        return ParkingMapper.entityListToVo(parkingRepository.findByCar(CarMapper.toEntity(carVo)));
     }
 
     @Override
-    public List<ParkingVO> findAllInProcessParking() {
-        return ParkingMapper.toVo(parkingRepository.findAllByExitTimeIsNull());
+    public List<ParkingVO> findAllInProgress() {
+        return ParkingMapper.entityListToVo(parkingRepository.findAllByExitTimeIsNull());
     }
 
     @Override

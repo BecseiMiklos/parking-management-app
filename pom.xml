@@ -12,6 +12,19 @@
     <packaging>jar</packaging>
 
     <name>Parking Management Parent Project</name>
+    <description>This project realizes a simple Parking Management System made as a homework for Programming Environments.</description>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/BecseiMiklos/parking-management-app.git</url>
+    </scm>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
